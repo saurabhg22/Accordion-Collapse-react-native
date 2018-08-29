@@ -13,6 +13,7 @@ import { CollapseHeader, CollapseBody } from "../../index";
 
 type Props = {
     isCollapsed: ?boolean,
+    canToggle: ?boolean,
     onToggle: ?Function,
     handleLongPress: ?Function
 };
@@ -33,9 +34,11 @@ export default class Collapse extends Component<Props> {
     }
 
     __toggle(){
-        this.setState({
-           show:!this.state.show
-        },()=>this.props.onToggle(this.state.show));
+        if(!(this.props.canToggle === false)){
+            this.setState({
+               show:!this.state.show
+            },()=>this.props.onToggle(this.state.show));
+        }
     }
 
     render() {
